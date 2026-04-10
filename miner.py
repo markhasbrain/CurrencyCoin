@@ -41,9 +41,13 @@ class Miner:
         max_coins: stop after finding this many (0 = unlimited)
         """
         if not self.genesis.load():
-            print("[MINER] Genesis not found! Run genesis first:")
-            print("        python currency.py genesis")
-            return
+            print("  Genesis not found. Downloading coin targets...")
+            print("  This only happens once.\n")
+            from genesis import download_genesis
+            if not download_genesis():
+                print("  Download failed. Generating locally instead (takes ~2 min)...")
+                self.genesis.generate()
+            self.genesis.load()
 
         stats = self.genesis.get_stats()
         if stats['remaining'] == 0:

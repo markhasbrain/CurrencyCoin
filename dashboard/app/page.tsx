@@ -319,27 +319,22 @@ export default function Home() {
               <span className="text-green-400">cd CurrencyCoin</span>
             </div>
             <div className="bg-black/50 rounded-lg p-4 border border-zinc-800">
-              <span className="text-zinc-500"># 2. Generate all 10M coin targets (takes ~2 min)</span>
-              <br />
-              <span className="text-green-400">python currency.py genesis</span>
-            </div>
-            <div className="bg-black/50 rounded-lg p-4 border border-zinc-800">
-              <span className="text-zinc-500"># 3. Generate a wallet</span>
+              <span className="text-zinc-500"># 2. Generate a wallet</span>
               <br />
               <span className="text-green-400">python currency.py wallet generate</span>
             </div>
             <div className="bg-black/50 rounded-lg p-4 border border-zinc-800">
-              <span className="text-zinc-500"># 4. Start mining (replace with your public key)</span>
+              <span className="text-zinc-500"># 3. Start mining (replace with your public key)</span>
               <br />
               <span className="text-green-400">{"python currency.py mine <your_public_key> 4"}</span>
             </div>
             <div className="bg-black/50 rounded-lg p-4 border border-zinc-800">
-              <span className="text-zinc-500"># 5. Check your balance</span>
+              <span className="text-zinc-500"># 4. Check your balance</span>
               <br />
               <span className="text-green-400">{"python currency.py wallet open <your_private_key>"}</span>
             </div>
             <div className="bg-black/50 rounded-lg p-4 border border-zinc-800">
-              <span className="text-zinc-500"># 6. Send CUR to someone</span>
+              <span className="text-zinc-500"># 5. Send CUR to someone</span>
               <br />
               <span className="text-green-400">{"python currency.py send <your_private_key> <their_public_key> <amount>"}</span>
             </div>

@@ -18,10 +18,48 @@ import json
 import time
 import struct
 import hashlib
+import urllib.request
 from config import (
     TOTAL_SUPPLY, GENESIS_MASTER_SEED, DATA_DIR,
     GENESIS_FILE, MINED_FILE
 )
+
+GENESIS_URL = "https://github.com/markhasbrain/CurrencyCoin/releases/download/v1.0/genesis.bin"
+
+
+def download_genesis() -> bool:
+    """Download the official genesis.bin from GitHub releases."""
+    os.makedirs(DATA_DIR, exist_ok=True)
+
+    if os.path.exists(GENESIS_FILE):
+        return True
+
+    print(f"[GENESIS] Downloading genesis.bin from GitHub...")
+    print(f"[GENESIS] URL: {GENESIS_URL}")
+    print(f"[GENESIS] This is ~611 MB, may take a few minutes.\n")
+
+    try:
+        def _progress(block_num, block_size, total_size):
+            downloaded = block_num * block_size
+            if total_size > 0:
+                pct = downloaded / total_size * 100
+                mb = downloaded / 1024 / 1024
+                total_mb = total_size / 1024 / 1024
+                sys.stdout.write(f"\r[GENESIS] {mb:.0f} / {total_mb:.0f} MB ({pct:.1f}%)")
+                sys.stdout.flush()
+
+        urllib.request.urlretrieve(GENESIS_URL, GENESIS_FILE, _progress)
+        print(f"\n[GENESIS] Download complete!")
+
+        # Init mined.json if needed
+        if not os.path.exists(MINED_FILE):
+            with open(MINED_FILE, 'w') as f:
+                json.dump({"mined": [], "total_mined": 0}, f)
+
+        return True
+    except Exception as e:
+        print(f"\n[GENESIS] Download failed: {e}")
+        return False
 
 
 def _generate_coin_target(index: int) -> bytes:

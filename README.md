@@ -42,19 +42,11 @@ Secured by **CUR-128** — a custom 100-step, 512-bit, quantum-resistant hash al
 Open Windows Terminal (or Command Prompt) and run these commands in order:
 
 ```
-git clone https://github.com/MarkFHII/CurrencyCoin.git
+git clone https://github.com/markhasbrain/CurrencyCoin.git
 cd CurrencyCoin
 ```
 
-### 1. Generate genesis (creates all 10M coin targets)
-
-```
-python currency.py genesis
-```
-
-This takes about 2-3 minutes. It generates a 640MB `genesis.bin` file containing all 10,000,000 coin target hashes.
-
-### 2. Generate a wallet
+### 1. Generate a wallet
 
 ```
 python currency.py wallet generate
@@ -62,27 +54,27 @@ python currency.py wallet generate
 
 This gives you a **private key** (keep secret) and a **public key** (your address). Save both.
 
-### 3. Start mining
+### 2. Start mining
 
-Replace `<your_public_key>` with the public key from step 2. The number at the end is how many CPU threads to use.
+Replace `<your_public_key>` with the public key from step 1. The number at the end is how many CPU threads to use. On first run, the genesis file (611 MB) will be automatically downloaded.
 
 ```
 python currency.py mine <your_public_key> 4
 ```
 
-### 4. Check your balance
+### 3. Check your balance
 
 ```
 python currency.py wallet open <your_private_key>
 ```
 
-### 5. Send CUR to someone
+### 4. Send CUR to someone
 
 ```
 python currency.py send <your_private_key> <their_public_key> <amount>
 ```
 
-### 6. Live dashboard (optional)
+### 5. Live dashboard (optional)
 
 ```
 cd dashboard
