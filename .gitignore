@@ -1,0 +1,6 @@
+currency_data/
+dashboard/node_modules/
+dashboard/.next/
+__pycache__/
+*.pyc
+.env
